@@ -74,6 +74,18 @@ def crearFeria(data):
     print('feria cargada')
     return lista
 
+def crearClientes():
+    file = open('clientes.txt', 'r')
+
+    aux = 0
+    for fila in file:
+        if aux == 0:
+            continue
+        elif aux == 1:
+            continue
+        elif aux == 2:
+            continue
+    file.close()
 
 def crearMapa(lista, ocupados):
     
@@ -86,7 +98,11 @@ def crearMapa(lista, ocupados):
         elif i not in ocupados:
             print('\n')
         else:
-            print('xxxx', end='')
+            print('xxxx', end='|-|')
         
     print('')
+    
+def vampiro(num):
+    if len(num) % 2 != 0:
+        return False
     

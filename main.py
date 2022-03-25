@@ -1,17 +1,19 @@
 from functions import *
 from gestionComida import gestionComida
 from gestionEventos import gestionEventos
-from ventaTickets import ventaTickest
+from ventaTickets import ventaTickets
 
 def main():
 
-    venta_tickets = True
+    seVendeTickets = True
     #obtener data proveniente de API
     data = init_data()
     #crear lista de eventos
     eventos = crearEventos(data["events"])
     #crear menú de feria
     comida = crearFeria(data['food_fair_inventory'])
+    #crear clientes
+    clientes = crearClientes()
 
     while True:
         clear()
@@ -28,14 +30,16 @@ def main():
         opcion = input('===>Opción: ')
 
         if opcion == '1':
-            venta_tickets = gestionEventos(eventos, venta_tickets)
+            seVendeTickets = gestionEventos(eventos, seVendeTickets)
             continue
         elif opcion == '2':
-            if venta_tickets:
-                venta_tickets(eventos)
+            clear()
+            if seVendeTickets:
+                ventaTickets(eventos)
                 continue
             else:
                 print('la venta de tickets está cerrada')
+                input('Presione enter para volver al menú principal')
                 continue
         elif opcion == '3':
             gestionComida(comida)

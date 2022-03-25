@@ -6,10 +6,15 @@ class Comida(ABC):
         self.clasificacion = clasificacion
         self.precio = round(precio + (precio * 0.16), 2)
         self.cantidad = cantidad
+        self.vendidos = 0
 
     @abstractmethod
     def info(self):
         pass
+
+    def vender(self):
+        self.cantidad -= 1
+        self.vendidos += 1
 
 class Bebida(Comida):
     def __init__(self, nombre, clasificacion, precio, cantidad, tamano):

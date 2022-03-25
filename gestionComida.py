@@ -15,6 +15,8 @@ def gestionComida(data):
         print('===>Menú principal (3)')
         opcion = input('===>Opción: ')
 
+        clear()
+
         if opcion == '1':
             continue
         elif opcion == '2':
@@ -22,6 +24,7 @@ def gestionComida(data):
             print('===>Nombre (1)')
             print('===>Tipo (2)')
             print('===>Rango de precio (3)')
+            print('===>Regresar (4)')
             opcion = input('===>Opción: ')
 
             clear()
@@ -42,6 +45,8 @@ def gestionComida(data):
                 for producto in data:
                     if producto.precio >= min and producto.precio <= max:
                         producto.info()
+            elif opcion == '4':
+                continue
             else:
                 print('opción no válida')
         else:
