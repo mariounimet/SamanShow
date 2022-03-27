@@ -1,7 +1,7 @@
 import requests
 import os
-from EventoMusical import *
-from EventoTeatro import *
+from Cliente import Cliente
+from Evento import EventoMusical, EventoTeatro
 from Comida import Alimento, Bebida
 
 def init_data():
@@ -68,24 +68,69 @@ def crearFeria(data):
                 presentacion = 'Empaque'
             lista.append(Alimento(nombre, 'Alimento', precio, cantidad, presentacion))
         elif producto['type'] == 2:
-            lista.append(Bebida(nombre, 'Bebida', precio[0], cantidad//3, 'Pequeño'))
-            lista.append(Bebida(nombre, 'Bebida', precio[1], cantidad//3, 'Mediano'))
-            lista.append(Bebida(nombre, 'Bebida', precio[2], cantidad//3, 'Grande'))
+            lista.append(Bebida(f'{nombre} pequeño', 'Bebida', precio[0], cantidad//3, 'pequeño'))
+            lista.append(Bebida(f'{nombre} mediano', 'Bebida', precio[1], cantidad//3, 'mediano'))
+            lista.append(Bebida(f'{nombre} grande', 'Bebida', precio[2], cantidad//3, 'grande'))
     print('feria cargada')
     return lista
 
 def crearClientes():
     file = open('clientes.txt', 'r')
 
+    clientes = []
+
     aux = 0
+    nombre = ''
+    ci = ''
+    edad = ''
+    eventoNombre = ''
+    montoEvento = 0
+    montoFeria = 0
+    asientos = []
+    comida = []
     for fila in file:
         if aux == 0:
+            datos = fila.split('|')
+            nombre = datos[0]
+            ci = datos[1]
+            edad = datos[2]
+            eventoNombre = datos[3]
+            montoEvento = datos[4]
+            montoFeria = datos[5]
+            aux += 1
             continue
         elif aux == 1:
+            asientos = fila.split('|')
+            asientos.pop(-1)
+            aux += 1
             continue
         elif aux == 2:
+            if fila != '-':
+                comida = fila.split('|')
+                comida.pop(-1)
+            clientes.append(Cliente(nombre, ci, edad, eventoNombre, asientos, montoEvento, montoFeria, comida))
+            aux = 0
             continue
     file.close()
+    return clientes
+    
+def ocuparAsientos(eventos, clientes):
+    
+    for cliente in clientes:
+        for evento in eventos:
+            if cliente.evento == evento.nombre:
+                evento.sillasOcupadas.extend(cliente.asientos)
+                break
+    return eventos
+
+def ajustarInventario(comida, clientes):
+    for cliente in clientes:
+        for producto in comida:
+            if producto.nombre in cliente.comida:
+                i = cliente.comida.count(producto.nombre)
+                producto.vender(i)
+
+    return comida
 
 def crearMapa(lista, ocupados):
     

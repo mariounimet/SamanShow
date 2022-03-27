@@ -14,6 +14,10 @@ def main():
     comida = crearFeria(data['food_fair_inventory'])
     #crear clientes
     clientes = crearClientes()
+    #ocupar asientos comprados
+    eventos = ocuparAsientos(eventos, clientes)
+    #Ajustar la cantidad de productos de comida
+    comida = ajustarInventario(comida, clientes)
 
     while True:
         clear()
@@ -35,7 +39,7 @@ def main():
         elif opcion == '2':
             clear()
             if seVendeTickets:
-                ventaTickets(eventos)
+                ventaTickets(eventos, clientes)
                 continue
             else:
                 print('la venta de tickets está cerrada')

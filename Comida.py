@@ -12,9 +12,10 @@ class Comida(ABC):
     def info(self):
         pass
 
-    def vender(self):
-        self.cantidad -= 1
-        self.vendidos += 1
+    def vender(self, veces):
+        for i in range(veces):
+            self.cantidad -= 1
+            self.vendidos += 1
 
 class Bebida(Comida):
     def __init__(self, nombre, clasificacion, precio, cantidad, tamano):
