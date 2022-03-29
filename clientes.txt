@@ -1,3 +1,3 @@
-Pepe|2222|24|Romeo & Julieta|20|30
-G1-3|G1-2|
-Pizza|Jugo grande|Coca Cola pequeño|Jugo grande|
+mario|3000|20|KenaAna & Guako|34.8|0
+G1-2|
+-

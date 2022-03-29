@@ -2,6 +2,7 @@ from functions import *
 from gestionComida import gestionComida
 from gestionEventos import gestionEventos
 from ventaTickets import ventaTickets
+from ventaFeria import ventaFeria
 
 def main():
 
@@ -39,7 +40,7 @@ def main():
         elif opcion == '2':
             clear()
             if seVendeTickets:
-                ventaTickets(eventos, clientes)
+                clientes.append(ventaTickets(eventos))
                 continue
             else:
                 print('la venta de tickets está cerrada')
@@ -48,7 +49,8 @@ def main():
         elif opcion == '3':
             gestionComida(comida)
             continue
-        elif opcion == 4:
+        elif opcion == '4':
+            ventaFeria(comida, clientes)
             continue
         else:
             clear()

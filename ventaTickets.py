@@ -58,6 +58,15 @@ def ventaTickets(data):
                 for i in asientos:
                     evento.sillasOcupadas.append(i)
                     evento.ingresoGenerado += total
+                    
+                file = open('clientes.txt', 'a')
+                file.write(f'{nombre}|{ci}|{edad}|{evento.nombre}|{total}|0\n')
+                lista = ''
+                for i in asientos:
+                    lista = lista + i + '|'
+                file.write(f'{lista}\n')
+                file.write('-\n')
+                file.close()
+
                 return Cliente(nombre, ci, edad, evento.nombre, asientos, total)
-            input()
             break

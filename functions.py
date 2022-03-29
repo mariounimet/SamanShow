@@ -89,28 +89,29 @@ def crearClientes():
     asientos = []
     comida = []
     for fila in file:
-        if aux == 0:
-            datos = fila.split('|')
-            nombre = datos[0]
-            ci = datos[1]
-            edad = datos[2]
-            eventoNombre = datos[3]
-            montoEvento = datos[4]
-            montoFeria = datos[5]
-            aux += 1
-            continue
-        elif aux == 1:
-            asientos = fila.split('|')
-            asientos.pop(-1)
-            aux += 1
-            continue
-        elif aux == 2:
-            if fila != '-':
-                comida = fila.split('|')
-                comida.pop(-1)
-            clientes.append(Cliente(nombre, ci, edad, eventoNombre, asientos, montoEvento, montoFeria, comida))
-            aux = 0
-            continue
+        if fila != '\n':
+            if aux == 0:
+                datos = fila.split('|')
+                nombre = datos[0]
+                ci = datos[1]
+                edad = datos[2]
+                eventoNombre = datos[3]
+                montoEvento = datos[4]
+                montoFeria = datos[5]
+                aux += 1
+                continue
+            elif aux == 1:
+                asientos = fila.split('|')
+                asientos.pop(-1)
+                aux += 1
+                continue
+            elif aux == 2:
+                if fila != '-':
+                    comida = fila.split('|')
+                    comida.pop(-1)
+                clientes.append(Cliente(nombre, ci, edad, eventoNombre, asientos, montoEvento, montoFeria, comida))
+                aux = 0
+                continue
     file.close()
     return clientes
     

@@ -25,7 +25,6 @@ class Bebida(Comida):
 
     def info(self):
         print(f'\n*{self.nombre}')
-        print(f'-Tamaño: {self.tamano},')
         print(f'-Precio: {self.precio}')
         print(f'-Existencia: {self.cantidad}')
 
@@ -36,4 +35,7 @@ class Alimento(Comida):
         self.presentacion = presentacion
 
     def info(self):
-        pass
+        print(f'\n*{self.nombre}')
+        print(f'-Presentación: {self.presentacion}')
+        print(f'-Precio: {self.precio}')
+        print(f'-Existencia: {self.cantidad}')
