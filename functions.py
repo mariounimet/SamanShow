@@ -103,13 +103,7 @@ def crearClientes():
             elif aux == 1:
                 asientos = fila.split('|')
                 asientos.pop(-1)
-                aux += 1
-                continue
-            elif aux == 2:
-                if fila != '-':
-                    comida = fila.split('|')
-                    comida.pop(-1)
-                clientes.append(Cliente(nombre, ci, edad, eventoNombre, asientos, montoEvento, montoFeria, comida))
+                clientes.append(Cliente(nombre, ci, edad, eventoNombre, asientos, montoEvento, montoFeria))
                 aux = 0
                 continue
     file.close()
@@ -121,16 +115,16 @@ def ocuparAsientos(eventos, clientes):
         for evento in eventos:
             if cliente.evento == evento.nombre:
                 evento.sillasOcupadas.extend(cliente.asientos)
+                evento.ingresoGenerado += cliente.montoEvento
                 break
     return eventos
 
-def ajustarInventario(comida, clientes):
-    for cliente in clientes:
+def ajustarInventario(comida):
+    with open('vendidos.txt', 'r') as file:
+        vendidos = file.readline().split('|')
         for producto in comida:
-            if producto.nombre in cliente.comida:
-                i = cliente.comida.count(producto.nombre)
-                producto.vender(i)
-
+            if producto.nombre in vendidos:
+                producto.vender(vendidos.count(producto.nombre))
     return comida
 
 def crearMapa(lista, ocupados):
@@ -148,9 +142,36 @@ def crearMapa(lista, ocupados):
         
     print('')
     
-def vampiro(num):
+def vampiro(num, mid1, mid2, midO1, midO2):
     if len(num) % 2 != 0:
         return False
+    elif midO1 == mid2 or midO2 == mid1:
+        return False
+
+    mitad = len(mid1)
+
+    for i in range(mitad):
+        for j in range(mitad):
+            if mid1[-1] == 0 and mid2[-1] == 0:
+                aux = mid2[0]
+                mid2 = mid2[1:]
+                mid2 += aux
+                continue
+            elif int(mid1) * int(mid2) == int(num):
+                return True
+            else:
+                aux = mid2[0]
+                mid2 = mid2[1:]
+                mid2 += aux
+        aux = mid1[0]
+        mid1 = mid1[1:]
+        mid1 += aux                
+
+    aux = num[0]
+    num = num[1:]
+    num += aux
+
+    return vampiro(num, num[:len(num)//2], num[len(num)//2:], midO1, midO2)
 
 def narcisista(ci):
     return False
@@ -163,12 +184,6 @@ def guardarCambios(clientes):
         data += f'{cliente.nombre}|{cliente.ci}|{cliente.edad}|{cliente.evento}|{cliente.montoEvento}|{cliente.montoFeria}|\n'
         for i in cliente.asientos:
             data += f'{i}|'
-        data += '\n'
-        if len(cliente.comida)>0:
-            for i in cliente.comida:
-                data += f'{i}|'
-        else:
-            data += '-'
         data += '\n'
 
     file = open('clientes.txt', 'w')

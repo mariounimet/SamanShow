@@ -3,6 +3,7 @@ from gestionComida import gestionComida
 from gestionEventos import gestionEventos
 from ventaTickets import ventaTickets
 from ventaFeria import ventaFeria
+from estadistica import estadistica
 
 def main():
 
@@ -18,7 +19,7 @@ def main():
     #ocupar asientos comprados
     eventos = ocuparAsientos(eventos, clientes)
     #Ajustar la cantidad de productos de comida
-    comida = ajustarInventario(comida, clientes)
+    comida = ajustarInventario(comida)
 
     while True:
         clear()
@@ -31,7 +32,8 @@ def main():
         print('===>Vender tickets (2)')
         print('===>Gestionar feria de comida (3)')
         print('===>Vender comida (4)')
-        print('===>Salir (5)')
+        print('===>Estadísticas (5)')
+        print('===>Salir (6)')
         opcion = input('===>Opción: ')
 
         if opcion == '1':
@@ -53,6 +55,9 @@ def main():
             ventaFeria(comida, clientes)
             guardarCambios(clientes)
             continue
+        elif opcion == '5':
+            if len(clientes) > 0:
+                estadistica(clientes, eventos, comida)
         else:
             clear()
             break

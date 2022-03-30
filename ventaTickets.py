@@ -42,7 +42,7 @@ def ventaTickets(data):
             
             descuento = 0
             iva = monto * 0.16
-            if vampiro(ci):
+            if vampiro(ci, ci[:len(ci)//2], ci[len(ci)//2:], ci[:len(ci)//2], ci[len(ci)//2:]):
                 descuento += (monto * 0.5)
     
             total = monto + iva - descuento
@@ -65,8 +65,9 @@ def ventaTickets(data):
                 for i in asientos:
                     lista = lista + i + '|'
                 file.write(f'{lista}\n')
-                file.write('-\n')
                 file.close()
+
+                evento.ingresoGenerado += total
 
                 return Cliente(nombre, ci, edad, evento.nombre, asientos, total)
             break

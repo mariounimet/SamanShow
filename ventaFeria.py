@@ -76,7 +76,7 @@ def ventaFeria(comida, clientes):
     if narcisista(ci):
         descuento += monto*0.15
 
-    total = monto + descuento
+    total = round(monto + descuento, 2)
     lista = set(bolsa)
 
     for producto in lista:
@@ -89,11 +89,15 @@ def ventaFeria(comida, clientes):
     continuar = input('¿Desea proceder con la compra? (y) (n)\n===>Opción: ').lower()
 
     if continuar == 'y':
-        clientes[numero_cliente].comida.extend(bolsa)
+        with open('vendidos.txt', 'a') as file:
+            for i in bolsa:
+                file.write(f'{i}|')
         clientes[numero_cliente].montoFeria += total
         for producto in comida:
             if producto.nombre in lista:
                 producto.vender(bolsa.count(producto.nombre))
+    else:
+        return True
     print('Compra exitosa')
     input('Presione ENTER para volver al menú principal')
     return True
