@@ -1,5 +1,5 @@
 from Comida import *
-from functions import clear
+from functions import clear, narcisista
 
 def ventaFeria(comida, clientes):
 
@@ -10,7 +10,7 @@ def ventaFeria(comida, clientes):
 
     ci = input('-->Introduzca número de cédula: ')
     buscador = False
-    numero_clinte = 0
+    numero_cliente = 0
     bolsa = []
     monto = 0
 
@@ -18,7 +18,7 @@ def ventaFeria(comida, clientes):
         if cliente.ci == ci:
             buscador = True
             break
-        numero_clinte += 1
+        numero_cliente += 1
         
     if not buscador:
         return False
@@ -68,15 +68,32 @@ def ventaFeria(comida, clientes):
         if continuar == 'y':
             continue
         else:
+            clear()
             break
 
+    descuento = 0
+
+    if narcisista(ci):
+        descuento += monto*0.15
+
+    total = monto + descuento
     lista = set(bolsa)
 
     for producto in lista:
-        print(producto, ', ', bolsa.count(producto))
-        
+        print(producto, ':', bolsa.count(producto))
+    
+    print(f'Subtotal: {monto}$')
+    print(f'Descuento: {descuento}$')
+    print(f'Total: {total}$')
 
-    input()
+    continuar = input('¿Desea proceder con la compra? (y) (n)\n===>Opción: ').lower()
 
-
+    if continuar == 'y':
+        clientes[numero_cliente].comida.extend(bolsa)
+        clientes[numero_cliente].montoFeria += total
+        for producto in comida:
+            if producto.nombre in lista:
+                producto.vender(bolsa.count(producto.nombre))
+    print('Compra exitosa')
+    input('Presione ENTER para volver al menú principal')
     return True

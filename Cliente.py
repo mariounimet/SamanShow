@@ -1,3 +1,6 @@
+from Comida import Comida
+
+
 class Cliente:
     def __init__(self, nombre, ci, edad, evento, asientos, montoEvento, montoFeria=0, comida=[]):
         self.nombre = nombre
@@ -5,8 +8,8 @@ class Cliente:
         self.edad = edad
         self.evento = evento
         self.asientos = asientos
-        self.montoEvento = montoEvento
-        self.montoFeria = montoFeria
+        self.montoEvento = float(montoEvento)
+        self.montoFeria = float(montoFeria)
         self.comida = comida
 
     def totalMonto(self):
@@ -20,3 +23,4 @@ class Cliente:
         print('Asientos: ')
         for i in self.asientos:
             print('-', i)
+        print(self.comida)

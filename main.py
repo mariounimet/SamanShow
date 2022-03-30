@@ -51,6 +51,7 @@ def main():
             continue
         elif opcion == '4':
             ventaFeria(comida, clientes)
+            guardarCambios(clientes)
             continue
         else:
             clear()

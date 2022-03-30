@@ -151,4 +151,27 @@ def crearMapa(lista, ocupados):
 def vampiro(num):
     if len(num) % 2 != 0:
         return False
-    
+
+def narcisista(ci):
+    return False
+
+def guardarCambios(clientes):
+
+    data = ''
+
+    for cliente in clientes:
+        data += f'{cliente.nombre}|{cliente.ci}|{cliente.edad}|{cliente.evento}|{cliente.montoEvento}|{cliente.montoFeria}|\n'
+        for i in cliente.asientos:
+            data += f'{i}|'
+        data += '\n'
+        if len(cliente.comida)>0:
+            for i in cliente.comida:
+                data += f'{i}|'
+        else:
+            data += '-'
+        data += '\n'
+
+    file = open('clientes.txt', 'w')
+    file.write(data)
+    file.close()
+    return True
