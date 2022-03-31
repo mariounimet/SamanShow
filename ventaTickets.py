@@ -74,5 +74,5 @@ def ventaTickets(data):
 
                 evento.ingresoGenerado += total
 
-                return Cliente(nombre, ci, edad, evento.nombre, asientos, total)
+                return Cliente(nombre, ci, edad, evento.nombre, asientos, total, 0)
             break

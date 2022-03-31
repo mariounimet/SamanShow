@@ -66,7 +66,7 @@ def ventaFeria(comida, clientes):
 
         #agrega productos a la bolsa
         for i in range(cantidad):
-            bolsa.append(eleccion.capitalize())
+            bolsa.append(eleccion.lower())
             monto += precio
         
 
@@ -103,10 +103,10 @@ def ventaFeria(comida, clientes):
                 file.write(f'{i}|')
         clientes[numero_cliente].montoFeria += total
         for producto in comida:
-            if producto.nombre in lista:
-                producto.vender(bolsa.count(producto.nombre))
+            if producto.nombre.lower() in lista:
+                producto.vender(bolsa.count(producto.nombre.lower()))
     else:
-        return True
+        return False
     print('Compra exitosa')
     input('Presione ENTER para volver al menú principal')
     return True

@@ -45,17 +45,20 @@ def gestionComida(data):
                 for producto in data:
                     if nombre.lower() == producto.nombre.lower() and producto.visible:
                         producto.info()
+                input('\nPresione ENTER para regresar')
             elif opcion == '2':
                 tipo = input('Ingrese el tipo de comida (bebida) (alimento): ')
                 for producto in data:
                     if tipo.lower() == producto.clasificacion.lower() and producto.visible:
                         producto.info()
+                input('\nPresione ENTER para regresar')
             elif opcion == '3':
                 min = int(input('Ingrese el menor precio: $'))
                 max = int(input('Ingrese el mayor precio: $'))
                 for producto in data:
                     if producto.precio >= min and producto.precio <= max and producto.visible:
                         producto.info()
+                input('\nPresione ENTER para regresar')
             elif opcion == '4':
                 continue
             else:

@@ -43,7 +43,9 @@ def main():
         elif opcion == '2':
             clear()
             if seVendeTickets:
-                clientes.append(ventaTickets(eventos))
+                nuevo = ventaTickets(eventos)
+                if nuevo != None:
+                    clientes.append(nuevo)
                 continue
             else:
                 print('la venta de tickets está cerrada')
