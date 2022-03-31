@@ -21,12 +21,14 @@ def gestionEventos(eventos, venta_tickets):
         clear()
 
         if opcion == '1':
+            #muesta información de todos los eventos
             for evento in eventos:
                 print('----------------------------------------------')
                 evento.info()
                 print('Asientos:')
                 crearMapa(evento.mapa, evento.sillasOcupadas)
         elif opcion == '2':
+            #busca eventos mediante filtros
             print('¿Qué filtro desea aplicar?\n')
             print('===>Tipo (1)')
             print('===>Fecha (2)')
@@ -76,6 +78,7 @@ def gestionEventos(eventos, venta_tickets):
                             crearMapa(evento.mapa, evento.sillasOcupadas)
                             break
         elif opcion == '3':
+            #cierra o abre la venta de tickets, al iniciar siempre estará abierta hasta usar esta opción
             venta_tickets = not venta_tickets
             if venta_tickets:
                 print('Venta de tickets abierta')

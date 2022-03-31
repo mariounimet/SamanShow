@@ -7,6 +7,7 @@ class Comida(ABC):
         self.precio = round(precio + (precio * 0.16), 2)
         self.cantidad = cantidad
         self.vendidos = 0
+        self.visible = True
 
     @abstractmethod
     def info(self):

@@ -4,6 +4,7 @@ from Cliente import Cliente
 from Evento import EventoMusical, EventoTeatro
 from Comida import Alimento, Bebida
 
+#crea diccionario con información del API
 def init_data():
     print('cargando datos...')
     url = 'https://raw.githubusercontent.com/Algoritmos-y-Programacion/api_saman_show/main/api.json'
@@ -14,12 +15,14 @@ def init_data():
         print('datos cargados')
         return data
 
+#limpia el terminal
 def clear():  #codigo de función obtenido de: https://micro.recursospython.com/recursos/como-limpiar-la-consola.html
     if os.name == "nt":
         os.system("cls")
     else:
         os.system("clear")
 
+#crea lista eventos a partir del diccionario creado en init_data
 def crearEventos(data):
     print("cargando eventos...")
     lista = []
@@ -52,7 +55,7 @@ def crearEventos(data):
     print('eventos cargados')
     return lista
 
-
+#crea lista de productos para la feria a partir del diccionario creado en init_data
 def crearFeria(data):
     print("cargando feria...")
     lista = []
@@ -74,6 +77,7 @@ def crearFeria(data):
     print('feria cargada')
     return lista
 
+#obtiene información de los clientes en la base de datos y los coloca en una lista
 def crearClientes():
     file = open('clientes.txt', 'r')
 
@@ -108,7 +112,8 @@ def crearClientes():
                 continue
     file.close()
     return clientes
-    
+
+#ocupa los asientos en el atributo sillas Ocupadas de los eventos
 def ocuparAsientos(eventos, clientes):
     
     for cliente in clientes:
@@ -119,6 +124,7 @@ def ocuparAsientos(eventos, clientes):
                 break
     return eventos
 
+#obtiene información del archivo "vendidos.txt" para saber cuántos productos se han vendido y cuántos quedan
 def ajustarInventario(comida):
     with open('vendidos.txt', 'r') as file:
         vendidos = file.readline().split('|')
@@ -127,6 +133,7 @@ def ajustarInventario(comida):
                 producto.vender(vendidos.count(producto.nombre))
     return comida
 
+#crea un mapa de los asientos del evento escogido
 def crearMapa(lista, ocupados):
     
     print('      ----------------------------------------------')
@@ -141,7 +148,8 @@ def crearMapa(lista, ocupados):
             print('xxxx', end='|-|')
         
     print('')
-    
+
+#verifica si un número es vampiro
 def vampiro(num, mid1, mid2, midO1, midO2):
     if len(num) % 2 != 0:
         return False
@@ -173,9 +181,21 @@ def vampiro(num, mid1, mid2, midO1, midO2):
 
     return vampiro(num, num[:len(num)//2], num[len(num)//2:], midO1, midO2)
 
+#verifica si un número es narcisista
 def narcisista(ci):
-    return False
+    potencia = len(ci)
+    suma = 0
+    nums = list(ci)
 
+    for i in nums:
+        suma += int(i)**potencia
+
+    if suma == int(ci):
+        return True
+    else:
+        return False
+
+#modifica la base de datos de clientes agregando el monto de dinero gastado en la feria
 def guardarCambios(clientes):
 
     data = ''

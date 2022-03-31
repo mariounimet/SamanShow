@@ -8,11 +8,12 @@ def estadistica(clientes, eventos, comida):
     promGasto = 0
     noFeria = 0
 
+    #recoge dinero total gastado por todos los clientes y la cantidad que no compró en feria
     for cliente in clientes:
         promGasto += cliente.totalMonto()
         if cliente.montoFeria == 0:
             noFeria += 1
-
+    #ordena clientes de mayor dinero gastado a menor
     for i in range(len(clientes)-1):
         mayor = clientes[i].totalMonto()
         clienteMayor = i
@@ -24,7 +25,7 @@ def estadistica(clientes, eventos, comida):
         aux = clientes[clienteMayor]
         clientes[clienteMayor] = clientes[i]
         clientes[i] = aux
-
+    #ordena eventos de mayor ingreso generado a menor
     for i in range(len(eventos)-1):
         mayor = eventos[i].ingresoGenerado
         eventoMayor = i
@@ -37,6 +38,7 @@ def estadistica(clientes, eventos, comida):
         eventos[eventoMayor] = eventos[i]
         eventos[i] = aux
 
+#ordena productos de feria del más vendido al menos vendido
     for i in range(len(comida)-1):
         mayor = comida[i].vendidos
         masVenta = i

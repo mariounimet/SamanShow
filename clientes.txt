@@ -1,6 +1,0 @@
-Mario|123|19|KenaAna & Guako|69.6|9.26|
-G1-1|G1-2|
-pepe|234|20|KenaAna & Guako|58.0|0.0|
-V1-3|
-ana|382|10|Romeo & Julieta|116.0|13.89|
-V1-1|V1-2|V1-3|V1-4|

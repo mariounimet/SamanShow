@@ -36,6 +36,7 @@ def main():
         print('===>Salir (6)')
         opcion = input('===>Opción: ')
 
+        #El programa entra en el módulo escogido
         if opcion == '1':
             seVendeTickets = gestionEventos(eventos, seVendeTickets)
             continue
